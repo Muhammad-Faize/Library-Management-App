@@ -12,7 +12,7 @@ def main():
         print("3.Borrow a book:    ")
         print("4.Returned a borrowed book:    ")
         print("5.View list of books:    ")
-        print("6.View books statues:    ")
+        print("6.View books status:    ")
         print("0.To exit")
         print("----------------------------------")
         user_inp = input("Choose one of the option: ").strip()
@@ -44,7 +44,7 @@ def create_tables():
     conn = None
     try:
         conn,cur = Connection.connection()
-        folder = 'Library_Management_App'
+        folder = 'D:\Faize\Library_Management_App'
         files =[
             "script.sql"
         ]

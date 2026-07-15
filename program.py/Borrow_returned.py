@@ -23,6 +23,7 @@ def borrow_Returned():
             for loan in loans:
                 if int(user_loan_id) == loan['borrower_id']:
                     is_valid = True
+                    break       
             if is_valid:        
                 break
             else:
