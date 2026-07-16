@@ -6,6 +6,8 @@ def add_borrower():
         if user_inp.isdigit():
             print("Entered value must not be numeric")
             continue
+        if user_inp == "Q":
+            return
         conn = None
         cur = None
         try:

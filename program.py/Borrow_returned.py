@@ -28,7 +28,7 @@ def borrow_Returned():
             else:
                 print("The loan id is invalid")
                 continue
-        cur.execute("""UPDATE loans_table SET date_returned = CURRENT_TIMESTAMP WHERE loan_id = %s""", (int(user_loan_id),))
+        cur.execute("""UPDATE loans_table SET date_returned = CURRENT_TIMESTAMP,book_status = 'Available' WHERE loan_id = %s""", (int(user_loan_id),))
         
         conn.commit()
         print("Book returned successfully")
