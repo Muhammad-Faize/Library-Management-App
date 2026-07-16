@@ -5,11 +5,21 @@ def Status():
     cur = None
     try:
         conn,cur = Connection.connection()
-        cur.execute('''SELECT Books_Table.book_id,Books_Table.book_name,Loans_Table.loan_id,Borrowers_Table.borrower_name,Loans_Table.date_borrowed, Loans_Table.date_returned from Books_Table 
-                        left join loans_table on loans_table.Book_Assigned_Id = Books_Table.Book_Id
-                        left join borrowers_table on loans_table.borrower_id = borrowers_table.borrower_id
-                        WHERE Loans_Table.loan_id IS NULL 
-                        OR Loans_Table.date_returned IS NULL;''')
+        cur.execute('''
+            SELECT b.book_id,
+                   b.book_name,
+                   l.loan_id,
+                   br.borrower_name,
+                   l.date_borrowed,
+                   l.date_returned
+            FROM Books_Table b
+            LEFT JOIN Loans_Table l
+              ON l.loan_id = (
+                  SELECT MAX(loan_id) FROM Loans_Table WHERE Book_Assigned_Id = b.book_id
+                )
+            LEFT JOIN Borrowers_Table br
+              ON l.borrower_id = br.borrower_id;
+        ''')
         loans = [dict(row) for row in cur.fetchall()]
         if not loans:
             print("No record to show")
