@@ -8,7 +8,7 @@ def Status():
         cur.execute('''
             SELECT b.book_id,
                 b.book_name,
-                br.borrower_name,
+                br.borrower_name as Last_borrower,
                 COALESCE(l.book_status, 'available') AS book_status,
                 l.date_borrowed,
                 l.date_returned
