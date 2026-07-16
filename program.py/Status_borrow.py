@@ -19,6 +19,8 @@ def status_borrow():
                 return
             print(tabulate(borrowers , headers="keys", tablefmt="grid"))
             borrower_name = input("Enter borrower name:  ").strip().capitalize()
+            if borrower_name == 'Q':
+                return
             if borrower_name.isdigit():
                 print("Dont enter numeric value for name")
                 continue
