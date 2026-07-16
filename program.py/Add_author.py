@@ -5,6 +5,9 @@ def Add_Author():
     cur = None
     while True:
         user_author = input("Enter Author name: ").strip().capitalize()
+        if len(user_author) == 0:
+            print("No data entered")
+            continue
         if user_author.isdigit():
             print("Enter valid data")
             continue

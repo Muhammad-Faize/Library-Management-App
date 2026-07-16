@@ -3,6 +3,9 @@ import Connection
 def add_borrower():
     while True:
         user_inp =  input("Enter borrower name: ").strip().capitalize()
+        if len(user_inp) == 0:
+            print("No data was entered")
+            continue
         if user_inp.isdigit():
             print("Entered value must not be numeric")
             continue
