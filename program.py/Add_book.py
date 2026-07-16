@@ -14,26 +14,31 @@ def Add_Book():
             if not authors:
                 print("No author exists in database")
                 return
-            for author in authors:
-                print(f"{author['author_id']} :  {author['author_name']}")
-            user_aa_id = input("Enter author id:    ")
-            if user_aa_id.lower() == 'q':
-                return        
-            if not user_aa_id.isdigit():
-                print("Author Id must be in digit")
-                continue
-            user_aa_id = int(user_aa_id)         
-            is_valid = False
-            for author in authors:
-                if user_aa_id == author['author_id']:
-                    is_valid = True
-            if is_valid:    
-                cur.execute('''INSERT INTO books_table (Book_Name,Author_Assigned_Id) VALUES (%s,%s)''',(user_book,user_aa_id))
-                conn.commit()
-                print("Book added successfully")
-            else:
-                print("Invalid author ID")
-                continue
+
+            while True:
+                for author in authors:
+                    print(f"{author['author_id']} :  {author['author_name']}")
+                user_aa_id = input("Enter author id:    ")
+                if user_aa_id.lower() == 'q':
+                    return        
+                if not user_aa_id.isdigit():
+                    print("Author Id must be in digit")
+                    continue
+                user_aa_id = int(user_aa_id)         
+                is_valid = False
+                for author in authors:
+                    if user_aa_id == author['author_id']:
+                        is_valid = True
+                        break
+                if is_valid:    
+                    cur.execute('''INSERT INTO books_table (Book_Name,Author_Assigned_Id) VALUES (%s,%s)''',(user_book,user_aa_id))
+                    conn.commit()
+                    print("Book added successfully")
+                    break
+                else:
+                    print("Invalid author ID")
+                    continue
+                
         except Exception as error:
             print("Error occured at add_book",error)
             return

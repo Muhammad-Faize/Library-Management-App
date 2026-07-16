@@ -1,16 +1,16 @@
 import Connection
+from tabulate import tabulate
 def View_Stock():
     conn = None 
     cur = None
     try:
         conn,cur = Connection.connection()
-        cur.execute('''SELECT Author_Name,Book_Name FROM authors_table INNER JOIN books_table ON authors_table.Author_Id = books_table.Author_Assigned_Id ''')
-        stocks = cur.fetchall()
+        cur.execute('''SELECT Authors_Table.Author_Name,Books_Table.Book_Name FROM Authors_Table INNER JOIN Books_Table ON Authors_Table.Author_Id = Books_Table.Author_Assigned_Id ''')
+        stocks = [dict(row) for row in cur.fetchall()]
         if not stocks:
             print("No record exists")
             return
-        for stock in stocks:
-            print(f"{stock['book_name']} by {stock['author_name']}")
+        print(tabulate(stocks,headers='keys',tablefmt='grid'))
     except Exception as error:
         print("An error occured at view stock",error)
         return
