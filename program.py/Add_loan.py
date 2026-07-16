@@ -46,7 +46,7 @@ def Add_Loan():
                 if user_borrower == borrower['borrower_id']:
                     is_valid2 = True
             if is_valid2:   
-                cur.execute('''INSERT INTO Loans_Table (Borrower_Id,Book_Assigned_Id,book_status) VALUES (%s,%s,'Not Available') ''',(user_borrower,user_borrow_book_id))
+                cur.execute('''INSERT INTO Loans_Table (Borrower_Id,Book_Assigned_Id) VALUES (%s,%s) ''',(user_borrower,user_borrow_book_id))
                 conn.commit()
                 print("Book has been borrowed")
                 break

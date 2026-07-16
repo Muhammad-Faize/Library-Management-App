@@ -14,7 +14,6 @@ def Add_Book():
             if not authors:
                 print("No author exists in database")
                 return
-
             while True:
                 for author in authors:
                     print(f"{author['author_id']} :  {author['author_name']}")
